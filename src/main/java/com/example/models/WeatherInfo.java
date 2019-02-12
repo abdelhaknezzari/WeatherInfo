@@ -4,13 +4,13 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherInfo {
-
-
     private long timeStampMillis;
     private double lonCoord;
     private double latCoord;
@@ -20,29 +20,32 @@ public class WeatherInfo {
     private String iconWeather;
     private String base;
     private double tempMain;
-    private int pressureMain;
+    private Integer pressureMain;
     private int humidityMain;
     private double temp_minMain;
     private double temp_maxMain;
+    // private Double sea_levelMain;
+    // private Double grnd_levelMain;
+
 
     private Long visibility;
 
     //private Wind wind;
     private double speedWind;
-    private int degWind;
+    private double degWind;
 
     private Integer allClouds;
 
     private long dt;
 
-    private int typeSys;
-    private int idSys;
+    private Integer typeSys;
+    private Integer idSys;
     private double messageSys;
     private String countrySys;
     private int sunriseSys;
     private int sunsetSys;
 
-    private long id;
+    private Integer id;
     private String name;
     private long cod;
 
@@ -58,7 +61,7 @@ public class WeatherInfo {
 
     @JsonProperty("weather")
     private <T> void unpackNested2(List<T> weather) {
-        Map<String, Object> obj = (Map<String, Object>) weather.get(0);
+        Map<?, ?> obj = (Map<?, ?>) weather.get(0);
 
         this.idWeather = (Integer) obj.get("id");
         this.mainWeather = (String) obj.get("main");
@@ -73,11 +76,16 @@ public class WeatherInfo {
         this.humidityMain = (Integer) main.get("humidity");
         this.temp_minMain = (Double) main.get("temp_min");
         this.temp_maxMain = (Double) main.get("temp_max");
+
+        // this.sea_levelMain = (Double) main.get("sea_level");
+        // this.grnd_levelMain = (Double) main.get("grnd_level");
+
     }
+
 
     @JsonProperty("wind")
     private void unpackNested4(Map<String, Object> wind) {
-        this.speedWind = (Double) wind.get("speed");
+        this.speedWind = (double) wind.get("speed");
         this.degWind = (int) wind.get("deg");
 
     }
@@ -89,14 +97,13 @@ public class WeatherInfo {
 
     @JsonProperty("sys")
     private void unpackNested6(Map<String, Object> sys) {
-        this.typeSys = (int) sys.get("type");
-        this.idSys = (int) sys.get("id");
+        this.typeSys = (Integer) sys.get("type");
+        this.idSys = (Integer) sys.get("id");
         this.messageSys = (double) sys.get("message");
         this.countrySys = (String) sys.get("country");
         this.sunriseSys = (int) sys.get("sunrise");
         this.sunsetSys = (int) sys.get("sunset");
     }
-
     @Override
     public String toString() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -105,13 +112,10 @@ public class WeatherInfo {
             return objectMapper.writeValueAsString(this);
 
         } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
-      
     }
-
     /**
      * @return the timeStampMillis
      */
@@ -241,14 +245,14 @@ public class WeatherInfo {
     /**
      * @return the pressureMain
      */
-    public int getPressureMain() {
+    public Integer getPressureMain() {
         return pressureMain;
     }
 
     /**
      * @param pressureMain the pressureMain to set
      */
-    public void setPressureMain(int pressureMain) {
+    public void setPressureMain(Integer pressureMain) {
         this.pressureMain = pressureMain;
     }
 
@@ -325,14 +329,14 @@ public class WeatherInfo {
     /**
      * @return the degWind
      */
-    public int getDegWind() {
+    public double getDegWind() {
         return degWind;
     }
 
     /**
      * @param degWind the degWind to set
      */
-    public void setDegWind(int degWind) {
+    public void setDegWind(double  degWind) {
         this.degWind = degWind;
     }
 
@@ -367,28 +371,28 @@ public class WeatherInfo {
     /**
      * @return the typeSys
      */
-    public int getTypeSys() {
+    public Integer getTypeSys() {
         return typeSys;
     }
 
     /**
      * @param typeSys the typeSys to set
      */
-    public void setTypeSys(int typeSys) {
+    public void setTypeSys(Integer typeSys) {
         this.typeSys = typeSys;
     }
 
     /**
      * @return the idSys
      */
-    public int getIdSys() {
+    public Integer getIdSys() {
         return idSys;
     }
 
     /**
      * @param idSys the idSys to set
      */
-    public void setIdSys(int idSys) {
+    public void setIdSys(Integer idSys) {
         this.idSys = idSys;
     }
 
@@ -451,14 +455,14 @@ public class WeatherInfo {
     /**
      * @return the id
      */
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -489,6 +493,34 @@ public class WeatherInfo {
     public void setCod(long cod) {
         this.cod = cod;
     }
+
+    // /**
+    //  * @return the sea_levelMain
+    //  */
+    // public double getSea_levelMain() {
+    //     return sea_levelMain;
+    // }
+
+    // /**
+    //  * @param sea_levelMain the sea_levelMain to set
+    //  */
+    // public void setSea_levelMain(double sea_levelMain) {
+    //     this.sea_levelMain = sea_levelMain;
+    // }
+
+    // /**
+    //  * @return the grnd_levelMain
+    //  */
+    // public double getGrnd_levelMain() {
+    //     return grnd_levelMain;
+    // }
+
+    // /**
+    //  * @param grnd_levelMain the grnd_levelMain to set
+    //  */
+    // public void setGrnd_levelMain(Double grnd_levelMain) {
+    //     this.grnd_levelMain = grnd_levelMain;
+    // }
 
     
 

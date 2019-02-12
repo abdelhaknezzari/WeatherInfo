@@ -1,0 +1,6 @@
+applications:
+- name: WeatherInfo
+  instances: 2
+  memory: 1G
+  path: target/demo-0.0.1-SNAPSHOT.war  
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git

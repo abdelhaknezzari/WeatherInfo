@@ -11,11 +11,14 @@
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<packaging>war</packaging>
+	<name>WeatherInfo</name>
+	<description>Weather Info</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+        <odata.version>4.0.0</odata.version>
+        <slf4j.version>1.7.7</slf4j.version>
 	</properties>
 
 	<dependencies>
@@ -34,6 +37,38 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
+    <dependency>
+      <groupId>org.apache.olingo</groupId>
+      <artifactId>odata-server-api</artifactId>
+      <version>${odata.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.olingo</groupId>
+      <artifactId>odata-server-core</artifactId>
+      <version>${odata.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.olingo</groupId>
+      <artifactId>odata-commons-api</artifactId>
+      <version>${odata.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.olingo</groupId>
+      <artifactId>odata-commons-core</artifactId>
+      <version>${odata.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
 	</dependencies>
 
 	<build>

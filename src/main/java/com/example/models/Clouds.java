@@ -2,7 +2,7 @@ package com.example.models;
 public class Clouds
 {
   // "clouds":{"all":24},
-  private Integer all;
+ // private Integer all;
 
     // public Clouds() {
 
